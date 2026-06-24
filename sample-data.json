@@ -1,0 +1,47 @@
+{
+  "defaultAdmin": {
+    "description": "Created automatically on first startup. Default credentials: username=admin, password=admin123"
+  },
+  "registerBroker": {
+    "endpoint": "POST /api/brokers/register",
+    "body": {
+      "fullName": "John Peter",
+      "region": "Dar es Salaam",
+      "specialty": "House Rental",
+      "phone": "0712345678",
+      "email": "john@gmail.com"
+    },
+    "description": "Register a new broker (status becomes PENDING)"
+  },
+  "clientRequest": {
+    "endpoint": "POST /api/requests",
+    "body": {
+      "clientName": "Amina",
+      "phone": "0755123456",
+      "region": "Dar es Salaam",
+      "specialty": "House Rental",
+      "budget": 300000
+    },
+    "description": "Submit a client service request"
+  },
+  "getAllBrokers": {
+    "endpoint": "GET /api/brokers",
+    "description": "Get all registered brokers"
+  },
+  "approveBroker": {
+    "endpoint": "PUT /api/brokers/{id}/approve",
+    "description": "Approve a broker by ID (e.g., PUT /api/brokers/1/approve)"
+  },
+  "rejectBroker": {
+    "endpoint": "PUT /api/brokers/{id}/reject",
+    "description": "Reject a broker by ID (e.g., PUT /api/brokers/1/reject)"
+  },
+  "searchBrokers": {
+    "endpoint": "GET /api/brokers/search?region=Dar%20es%20Salaam&specialty=House%20Rental",
+    "description": "Search for approved brokers by region and specialty"
+  },
+  "getAllRequests": {
+    "endpoint": "GET /api/requests",
+    "description": "Get all client requests"
+  }
+}

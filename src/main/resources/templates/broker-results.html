@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrokerFinder - Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">BrokerFinder</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Register as Broker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/request">Submit Request</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/broker/login">Broker Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/login">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Results -->
+    <div class="container mt-5">
+        <h2>Search Results</h2>
+        <p class="text-muted">
+            Showing brokers in <strong th:text="${region}">Region</strong>
+            specializing in <strong th:text="${specialty}">Specialty</strong>
+        </p>
+        <hr>
+
+        <!-- If no brokers found -->
+        <div class="alert alert-info" th:if="${#lists.isEmpty(brokers)}">
+            No approved brokers found for this region and specialty.
+            <a href="/" class="alert-link">Try a different search</a>.
+        </div>
+
+        <!-- Broker Cards -->
+        <div class="row" th:unless="${#lists.isEmpty(brokers)}">
+            <div class="col-md-4 mb-4" th:each="broker : ${brokers}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a th:href="@{/broker/{id}(id=${broker.id})}" th:text="${broker.fullName}" class="text-decoration-none">Broker Name</a>
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li><strong>Region:</strong> <span th:text="${broker.region}">Region</span></li>
+                            <li><strong>Specialty:</strong> <span th:text="${broker.specialty}">Specialty</span></li>
+                            <li><strong>Phone:</strong> <span th:text="${broker.phone}">Phone</span></li>
+                            <li><strong>Email:</strong> <span th:text="${broker.email}">Email</span></li>
+                            <li>
+                                <strong>Status:</strong>
+                                <span class="badge bg-success" th:text="${broker.status}">Status</span>
+                            </li>
+                        </ul>
+                        <a th:href="@{/broker/{id}(id=${broker.id})}" class="btn btn-sm btn-outline-primary">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="/" class="btn btn-outline-primary mt-3">Back to Search</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-muted py-3 mt-5">
+        <p class="mb-0">&copy; 2026 BrokerFinder. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
