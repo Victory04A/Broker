@@ -367,15 +367,19 @@ body {
 }
 
 /* --- Footer --- */
-footer {
+footer.bg-light {
     background: var(--primary-dark) !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: 1000;
+}
+
+footer.bg-light .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
 footer p {

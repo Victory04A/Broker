@@ -1,8 +1,10 @@
 package com.brokerfinder.service;
 
 import com.brokerfinder.model.Broker;
+import com.brokerfinder.repository.BrokerNotificationRepository;
 import com.brokerfinder.repository.BrokerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +17,12 @@ import java.util.Optional;
 public class BrokerService {
 
     private final BrokerRepository brokerRepository;
+    private final BrokerNotificationRepository notificationRepository;
 
-    public BrokerService(BrokerRepository brokerRepository) {
+    public BrokerService(BrokerRepository brokerRepository,
+                         BrokerNotificationRepository notificationRepository) {
         this.brokerRepository = brokerRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     /**
@@ -57,6 +62,17 @@ public class BrokerService {
                 .orElseThrow(() -> new RuntimeException("Broker not found with id: " + id));
         broker.setStatus("REJECTED");
         return brokerRepository.save(broker);
+    }
+
+    /**
+     * Delete a broker and their notifications.
+     */
+    @Transactional
+    public void deleteBroker(Long id) {
+        Broker broker = brokerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Broker not found with id: " + id));
+        notificationRepository.deleteByBrokerId(id);
+        brokerRepository.delete(broker);
     }
 
     /**

@@ -55,4 +55,13 @@ public class AdminController {
         brokerService.rejectBroker(id);
         return "redirect:/admin/dashboard";
     }
+
+    /**
+     * Remove a broker completely from the admin dashboard.
+     */
+    @PostMapping("/remove/{id}")
+    public String removeBroker(@PathVariable Long id) {
+        brokerService.deleteBroker(id);
+        return "redirect:/admin/dashboard";
+    }
 }

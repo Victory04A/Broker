@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Repository for broker notifications about client requests.
- */
+
 @Repository
 public interface BrokerNotificationRepository extends JpaRepository<BrokerNotification, Long> {
 
@@ -17,4 +15,6 @@ public interface BrokerNotificationRepository extends JpaRepository<BrokerNotifi
     List<BrokerNotification> findByBrokerIdOrderByNotifiedAtDesc(Long brokerId);
 
     List<BrokerNotification> findByRequestId(Long requestId);
+
+    void deleteByBrokerId(Long brokerId);
 }

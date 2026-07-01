@@ -6,8 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * Seeds default data on application startup.
- * Creates a default admin account if none exist.
+  default data on application startup.
+ 
  */
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -20,7 +20,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Create default admin if no admins exist
         if (adminRepository.count() == 0) {
             Admin admin = new Admin();
             admin.setUsername("admin");

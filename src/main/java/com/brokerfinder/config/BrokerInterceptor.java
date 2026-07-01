@@ -6,10 +6,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-/**
- * Interceptor that protects broker routes.
- * Redirects to broker login page if no broker is logged in.
- */
 @Component
 public class BrokerInterceptor implements HandlerInterceptor {
 

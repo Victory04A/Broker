@@ -84,6 +84,7 @@
                         <th>Specialty</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +95,11 @@
                         <td th:text="${broker.specialty}">Specialty</td>
                         <td th:text="${broker.phone}">Phone</td>
                         <td th:text="${broker.email}">Email</td>
+                        <td>
+                            <form th:action="@{/admin/remove/{id}(id=${broker.id})}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>
