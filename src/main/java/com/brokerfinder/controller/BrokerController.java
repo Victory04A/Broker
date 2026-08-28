@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * REST controller for broker management.
- * Provides endpoints for registration and admin management.
- */
+
 @RestController
 @RequestMapping("/api/brokers")
 public class BrokerController {
@@ -24,7 +21,6 @@ public class BrokerController {
 
     /**
      * Register a new broker.
-     * POST /api/brokers/register
      */
     @PostMapping("/register")
     public ResponseEntity<?> registerBroker(@Valid @RequestBody Broker broker) {
@@ -36,19 +32,12 @@ public class BrokerController {
         }
     }
 
-    /**
-     * Get all brokers.
-     * GET /api/brokers
-     */
+    
     @GetMapping
     public List<Broker> getAllBrokers() {
         return brokerService.getAllBrokers();
     }
 
-    /**
-     * Approve a broker by ID.
-     * PUT /api/brokers/{id}/approve
-     */
     @PutMapping("/{id}/approve")
     public ResponseEntity<?> approveBroker(@PathVariable Long id) {
         try {
@@ -59,10 +48,6 @@ public class BrokerController {
         }
     }
 
-    /**
-     * Reject a broker by ID.
-     * PUT /api/brokers/{id}/reject
-     */
     @PutMapping("/{id}/reject")
     public ResponseEntity<?> rejectBroker(@PathVariable Long id) {
         try {
@@ -73,10 +58,6 @@ public class BrokerController {
         }
     }
 
-    /**
-     * Search for approved brokers by region and specialty.
-     * GET /api/brokers/search?region=...&specialty=...
-     */
     @GetMapping("/search")
     public List<Broker> searchBrokers(
             @RequestParam String region,

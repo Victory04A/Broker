@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Controller for admin authentication.
- * Handles login and logout using HttpSession.
+ * Admin authentication.
  */
 @Controller
 @RequestMapping("/admin")
@@ -26,7 +25,6 @@ public class LoginController {
 
     /**
      * Show the login form.
-     * If already logged in, redirect to dashboard.
      */
     @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
@@ -37,7 +35,7 @@ public class LoginController {
     }
 
     /**
-     * Process login: validate credentials and create session.
+    credentials varidation and create session.
      */
     @PostMapping("/login")
     public String processLogin(
@@ -46,23 +44,19 @@ public class LoginController {
             HttpSession session,
             Model model) {
 
-        // Look up admin by username
         Admin admin = adminRepository.findByUsername(username).orElse(null);
 
         if (admin != null && admin.getPassword().equals(password)) {
-            // Login success - store admin in session
             session.setAttribute("adminUser", admin);
             return "redirect:/admin/dashboard";
         }
 
-        // Login failed
+    
         model.addAttribute("error", "Invalid username or password.");
         return "admin-login";
     }
 
-    /**
-     * Logout: invalidate the session and redirect to login.
-     */
+   
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

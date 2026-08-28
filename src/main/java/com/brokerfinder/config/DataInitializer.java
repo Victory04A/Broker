@@ -6,8 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
-  default data on application startup.
- 
+  *default data on application startup.
  */
 @Component
 public class DataInitializer implements CommandLineRunner {

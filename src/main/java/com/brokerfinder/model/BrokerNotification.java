@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * Entity representing a notification sent to a broker about a client request.
- * Brokers can accept or reject requests assigned to them.
+ *Notification sent to a broker about a client request.
  */
 @Entity
 @Table(name = "broker_notifications")
@@ -31,7 +30,7 @@ public class BrokerNotification {
     private Broker broker;
 
     /**
-     * Status: PENDING, ACCEPTED, REJECTED
+     * Status
      */
     @Column(nullable = false)
     private String status = "PENDING";

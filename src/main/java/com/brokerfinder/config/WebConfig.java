@@ -4,10 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * Web configuration that registers interceptors.
- * Protects admin routes and broker dashboard routes.
- */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

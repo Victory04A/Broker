@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Service for managing broker notifications about client requests.
- * Matches approved brokers to client requests and tracks accept/reject.
+ * Matching approved brokers to client requests.
  */
 @Service
 public class BrokerNotificationService {
@@ -26,7 +25,7 @@ public class BrokerNotificationService {
     }
 
     /**
-     * Notify all APPROVED brokers matching the request's region and specialty.
+     * Notify all APPROVED brokers matching the request.
      */
     public void notifyMatchingBrokers(ClientRequest request) {
         List<Broker> brokers = brokerService.searchBroker(request.getRegion(), request.getSpecialty());
@@ -41,15 +40,12 @@ public class BrokerNotificationService {
     }
 
     /**
-     * Get all notifications for a broker, newest first.
+     * Get all notifications for a broker.
      */
     public List<BrokerNotification> getNotificationsForBroker(Long brokerId) {
         return notificationRepository.findByBrokerIdOrderByNotifiedAtDesc(brokerId);
     }
 
-    /**
-     * Get pending notifications for a broker.
-     */
     public List<BrokerNotification> getPendingNotifications(Long brokerId) {
         return notificationRepository.findByBrokerIdAndStatus(brokerId, "PENDING");
     }

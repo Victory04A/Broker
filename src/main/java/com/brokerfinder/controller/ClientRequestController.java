@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * REST controller for client service requests.
- * Provides endpoints for submitting and viewing client requests.
+ * submitting and viewing client requests.
  */
 @RestController
 @RequestMapping("/api/requests")
@@ -22,10 +21,7 @@ public class ClientRequestController {
         this.clientRequestService = clientRequestService;
     }
 
-    /**
-     * Submit a new client service request.
-     * POST /api/requests
-     */
+
     @PostMapping
     public ResponseEntity<?> submitRequest(@Valid @RequestBody ClientRequest request) {
         try {
@@ -36,10 +32,6 @@ public class ClientRequestController {
         }
     }
 
-    /**
-     * Get all client requests.
-     * GET /api/requests
-     */
     @GetMapping
     public List<ClientRequest> getAllRequests() {
         return clientRequestService.getAllRequests();

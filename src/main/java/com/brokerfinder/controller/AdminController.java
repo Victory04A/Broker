@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controller for admin dashboard views.
- * Handles broker approval/rejection and viewing client requests.
+ *broker approval,rejection and viewing client requests.
  */
 @Controller
 @RequestMapping("/admin")
@@ -26,9 +25,6 @@ public class AdminController {
         this.clientRequestService = clientRequestService;
     }
 
-    /**
-     * Display admin dashboard with pending brokers and client requests.
-     */
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("pendingBrokers", brokerService.getBrokersByStatus("PENDING"));
@@ -38,27 +34,17 @@ public class AdminController {
         return "admin-dashboard";
     }
 
-    /**
-     * Approve a broker from the admin dashboard.
-     */
     @PostMapping("/approve/{id}")
     public String approveBroker(@PathVariable Long id) {
         brokerService.approveBroker(id);
         return "redirect:/admin/dashboard";
     }
 
-    /**
-     * Reject a broker from the admin dashboard.
-     */
     @PostMapping("/reject/{id}")
     public String rejectBroker(@PathVariable Long id) {
         brokerService.rejectBroker(id);
         return "redirect:/admin/dashboard";
     }
-
-    /**
-     * Remove a broker completely from the admin dashboard.
-     */
     @PostMapping("/remove/{id}")
     public String removeBroker(@PathVariable Long id) {
         brokerService.deleteBroker(id);

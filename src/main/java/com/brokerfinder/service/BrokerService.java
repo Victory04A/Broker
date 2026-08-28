@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service class for managing broker operations.
- * Handles registration, approval, rejection, and search functionality.
+ * Registration, approval, rejection, and search functionality.
  */
 @Service
 public class BrokerService {
@@ -25,10 +24,6 @@ public class BrokerService {
         this.notificationRepository = notificationRepository;
     }
 
-    /**
-     * Register a new broker with PENDING status.
-     * Checks for duplicate email before saving.
-     */
     public Broker registerBroker(Broker broker) {
         if (brokerRepository.existsByEmail(broker.getEmail())) {
             throw new RuntimeException("A broker with this email already exists.");
@@ -37,15 +32,13 @@ public class BrokerService {
         return brokerRepository.save(broker);
     }
 
-    /**
-     * Retrieve all registered brokers.
-     */
+    
     public List<Broker> getAllBrokers() {
         return brokerRepository.findAll();
     }
 
     /**
-     * Approve a broker by setting their status to APPROVED.
+     * Approve a broker.
      */
     public Broker approveBroker(Long id) {
         Broker broker = brokerRepository.findById(id)
@@ -55,7 +48,7 @@ public class BrokerService {
     }
 
     /**
-     * Reject a broker by setting their status to REJECTED.
+     * Reject a broker.
      */
     public Broker rejectBroker(Long id) {
         Broker broker = brokerRepository.findById(id)
@@ -65,7 +58,7 @@ public class BrokerService {
     }
 
     /**
-     * Delete a broker and their notifications.
+     * Delete a broker.
      */
     @Transactional
     public void deleteBroker(Long id) {
@@ -75,25 +68,20 @@ public class BrokerService {
         brokerRepository.delete(broker);
     }
 
-    /**
-     * Get a single broker by ID.
-     */
+    
     public Broker getBrokerById(Long id) {
         return brokerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Broker not found with id: " + id));
     }
 
     /**
-     * Search for APPROVED brokers by region and specialty.
-     * Used by clients looking for brokers.
+     * Search for APPROVED brokers.
      */
     public List<Broker> searchBroker(String region, String specialty) {
         return brokerRepository.findByStatusAndRegionAndSpecialty("APPROVED", region, specialty);
     }
 
-    /**
-     * Get all brokers with a specific status.
-     */
+    
     public List<Broker> getBrokersByStatus(String status) {
         return brokerRepository.findByStatus(status);
     }

@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * Controller for the home page and broker search functionality.
- * Handles Thymeleaf view rendering.
+ *  home page and broker search functionality.
  */
 @Controller
 public class HomeController {
@@ -23,18 +22,11 @@ public class HomeController {
         this.brokerService = brokerService;
     }
 
-    /**
-     * Display the home page with a search form.
-     */
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
-    /**
-     * Handle broker search from the home page form.
-     * Returns results to the broker-results page.
-     */
     @GetMapping("/search")
     public String searchBrokers(
             @RequestParam String region,
@@ -47,10 +39,6 @@ public class HomeController {
         return "broker-results";
     }
 
-    /**
-     * Display broker detail page.
-     * Redirects to home with error if broker not found.
-     */
     @GetMapping("/broker/{id}")
     public String viewBroker(@PathVariable Long id, Model model) {
         try {

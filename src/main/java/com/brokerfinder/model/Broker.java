@@ -10,8 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Entity representing a broker registered in the system.
- * Brokers are registered by themselves and approved/rejected by the admin.
+ * Broker registered in the system.
  */
 @Entity
 @Table(name = "brokers")
@@ -53,10 +52,6 @@ public class Broker {
     @Column(nullable = false)
     private String password;
 
-    /**
-     * Status can be: PENDING, APPROVED, REJECTED
-     * Default value is PENDING when a broker registers.
-     */
     @Column(nullable = false)
     private String status = "PENDING";
 }

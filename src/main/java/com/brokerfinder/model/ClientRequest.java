@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 /**
- * Entity representing a service request submitted by a client.
- * Clients fill in their details and a broker searches based on their needs.
+ * Service request submitted by a client.
  */
 @Entity
 @Table(name = "client_requests")

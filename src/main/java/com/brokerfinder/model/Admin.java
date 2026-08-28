@@ -6,10 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Entity representing an admin who manages the system.
- * Admins can approve/reject brokers and view client requests.
- */
 @Entity
 @Table(name = "admins")
 @Data

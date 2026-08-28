@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controller for broker authentication and dashboard.
- * Brokers log in using their email and password to view and manage client requests.
- */
+//broker authentication and dashboard.
 @Controller
 @RequestMapping("/broker")
 public class BrokerAuthController {
@@ -29,9 +26,8 @@ public class BrokerAuthController {
         this.notificationService = notificationService;
     }
 
-    /**
-     * Show broker login form.
-     */
+    //Show broker login form.
+
     @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
         if (session.getAttribute("brokerUser") != null) {
@@ -40,9 +36,6 @@ public class BrokerAuthController {
         return "broker-login";
     }
 
-    /**
-     * Process broker login.
-     */
     @PostMapping("/login")
     public String processLogin(@RequestParam String email,
                                @RequestParam String password,
@@ -64,9 +57,6 @@ public class BrokerAuthController {
         return "broker-login";
     }
 
-    /**
-     * Show broker dashboard with notifications.
-     */
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session, Model model) {
         Broker broker = (Broker) session.getAttribute("brokerUser");
@@ -103,9 +93,6 @@ public class BrokerAuthController {
         return "redirect:/broker/dashboard";
     }
 
-    /**
-     * Logout broker.
-     */
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("brokerUser");
